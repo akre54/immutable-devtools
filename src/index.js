@@ -1,4 +1,6 @@
-const createFormatter = require("./createFormatter");
+import createFormatter from "./createFormatter";
+
+let installed = false;
 
 // Check for globally defined Immutable and add an install method to it.
 if (typeof Immutable !== "undefined") {
@@ -7,9 +9,9 @@ if (typeof Immutable !== "undefined") {
 
 // I imagine most people are using Immutable as a CommonJS module though...
 
-let installed = false;
-module.exports = function install(Immutable) {
-  if (typeof window === undefined) {
+export default function install(Immutable) {
+
+  if (typeof window === "undefined") {
     throw new Error("Can only install immutable-devtools in a browser environment.");
   }
 
